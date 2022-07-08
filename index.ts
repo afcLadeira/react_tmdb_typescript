@@ -1,5 +1,7 @@
+import express, { Application, NextFunction, Request, Response } from "express";
+
 require("dotenv").config();
-const express = require("express");
+//const express = require("express");
 const mongoose = require("mongoose");
 
 const path = require("path");
@@ -8,7 +10,7 @@ const { logger } = require("./server/middleware/logger");
 const cookieParser = require("cookie-parser");
 const PORT = process.env.PORT || 3001;
 
-const app = express();
+const app : Application = express();
 
 const routes = require("./server/routes");
 const { errorHandler } = require("./server/middleware/errorHandler");
@@ -34,17 +36,19 @@ const allowedOrigins = [
 
 // //credentials middleware , before CORS!
 
-const credentials = (req, res, next) => {
+const credentials = (req : Request, res: Response, next : NextFunction) => {
   const origin = req.headers.origin;
   // if (allowedOrigins.includes(origin)) {
-  res.header("Access-Control-Allow-Credentials", true);
+
+  //!true : boolean , passou a ser string por causa de erro de typescript
+  res.header("Access-Control-Allow-Credentials", 'true');
   //}
   next();
 };
 app.use(credentials);
 
 const corsOptions = {
-  origin: (origin, callback) => {
+  origin: (origin : any, callback : any) => {
     //if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
     callback(null, true);
     //} else {
@@ -71,7 +75,7 @@ app.use("/", express.static(PUBLIC_FOLDER));
 
 app.use("/api", routes);
 
-app.get("/*", function (req, res) {
+app.get("/*", function (req : Request, res : Response) {
   res.sendFile(path.join(PUBLIC_FOLDER, "index.html"));
 });
 

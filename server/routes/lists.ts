@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const mylistsController = require('../controller/mylistsController');
 
 const app = express();

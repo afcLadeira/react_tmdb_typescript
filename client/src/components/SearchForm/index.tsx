@@ -122,7 +122,7 @@ export default function SearchForm({ setShowPopular }: SearchFormProps) {
         </div>
       </Form>
       {/* for jest test */}
-      {debounceValue && <h1 data-testid="displaySearch">{debounceValue}</h1>}
+      {/* {debounceValue && <h1 data-testid="displaySearch">{debounceValue}</h1>} */}
 
       <SearchResults
         searchString={debounceValue}

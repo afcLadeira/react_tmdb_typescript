@@ -1,3 +1,5 @@
+import { Request, Response } from "express";
+
 //mongo
 const User = require('../models/users');
 const Favorite = require("../models/favorites");
@@ -7,7 +9,7 @@ const Favorite = require("../models/favorites");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-const handleRefreshToken = async (req, res) => {
+const handleRefreshToken = async (req :Request, res : Response) => {
   const cookies = req.cookies;
 
   if (!cookies?.jwt) {
@@ -25,7 +27,7 @@ const handleRefreshToken = async (req, res) => {
 
   //evaluate jwt
 
-  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err, decoded) => {
+  jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err : any, decoded : any) => {
     if (err || foundUser.userName !== decoded.userName) {
       return res.sendStatus(403);
 

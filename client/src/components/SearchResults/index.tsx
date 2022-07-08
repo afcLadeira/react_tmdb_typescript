@@ -38,7 +38,8 @@ export default function SearchResults({
 
   return (
     <div data-testid="childComponent">
-      <h1 data-testid="displaySearchOtherComponent">{searchString}</h1>
+       {/* for jest test */}
+      {/* <h1 data-testid="displaySearchOtherComponent">{searchString}</h1> */}
       {data ? (
         <div style={{ textAlign: "center" }}>
           <Heading2>Search Results</Heading2>

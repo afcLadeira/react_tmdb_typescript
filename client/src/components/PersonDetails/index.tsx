@@ -10,7 +10,6 @@ export interface PersonDetailsProps {
 export default function PersonDetails({ data }: PersonDetailsProps) {
   return (
     <div>
-      : PersonDetailsProps
       {data ? (
         <div style={{ padding: 10, textAlign: "center" }}>
           <Image src={`${PROFILE_URL}${data.profile_path}`}></Image>

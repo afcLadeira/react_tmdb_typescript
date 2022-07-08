@@ -1,7 +1,9 @@
 //var mockData = require('../mockdata/MOCK_DATA.json')
 
+import { Request, Response } from "express";
 
-const getUsers = async (req, res) => {
+
+const getUsers = async (req : Request, res : Response) => {
     try {
         
         setTimeout(() => {    

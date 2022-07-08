@@ -1,6 +1,9 @@
+import { Request, Response } from "express";
+import { getErrorMessage } from "../helpers/errorHelper";
+
 const Favorite = require("../models/favorites");
 
-const getAllFavoritesFromUser = async (req, res) => {
+const getAllFavoritesFromUser = async (req : Request, res : Response) => {
   try {
     const { userId } = req.params;
 
@@ -14,11 +17,11 @@ const getAllFavoritesFromUser = async (req, res) => {
           : { userId: Number(userId), favoriteMovies: [] }
       );
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.sendStatus(500).json({ message: getErrorMessage(error) });
   }
 };
 
-const addFavorite = async (req, res) => {
+const addFavorite = async (req : Request, res : Response) => {
   const movie = req.body;
   const { id: userId } = req.params;
 
@@ -40,7 +43,7 @@ const addFavorite = async (req, res) => {
   res.json(result);
 };
 
-const deleteFavorite = async (req, res) => {
+const deleteFavorite = async (req : Request, res : Response) => {
   const { userId, movieId } = req.params;
 
   let favorite = await Favorite.findOne({ userId: userId }).exec();
@@ -50,7 +53,7 @@ const deleteFavorite = async (req, res) => {
   }
 
   favorite.favoriteMovies = [
-    ...favorite.favoriteMovies.filter((mov) => mov.id != movieId),
+    ...favorite.favoriteMovies.filter((mov : any) => mov.id != movieId),
   ];
 
   const result = await favorite.save();

@@ -1,6 +1,9 @@
+import { Request, Response } from "express";
+import { getErrorMessage } from "../helpers/errorHelper";
+
 const List = require("../models/lists");
 
-const getAllListsFromUser = async (req, res) => {
+const getAllListsFromUser = async (req : Request, res : Response) => {
   try {
   
 
@@ -10,11 +13,11 @@ const getAllListsFromUser = async (req, res) => {
 
     res.status(200).json(userLists);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.sendStatus(500).json({ message: getErrorMessage(error) });
   }
 };
 
-const createList = async (req, res) => {
+const createList = async (req : Request, res : Response) => {
   const list = req.body;
  
 
@@ -30,12 +33,11 @@ const createList = async (req, res) => {
     const result = await List.create(list);
 
     res.status(201).json(result);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: err.message });
+  } catch (error) {
+    return res.sendStatus(500).json({ message: getErrorMessage(error) });
   }
 };
-const updateList = async (req, res) => {
+const updateList = async (req : Request, res : Response) => {
   const { userId, id } = req.params;
   const updatedList = req.body;
 
@@ -54,7 +56,7 @@ const updateList = async (req, res) => {
   res.json(result);
 };
 
-const updateListMovies = async (req, res) => {
+const updateListMovies = async (req : Request, res : Response) => {
   const { id } = req.params;
   const movie = req.body;
 
@@ -70,7 +72,7 @@ const updateListMovies = async (req, res) => {
   res.json(result);
 };
 
-const deleteList = async (req, res) => {
+const deleteList = async (req : Request, res : Response) => {
   const { id } = req.params;
   if (!id) return res.status(400).json({ message: "List ID required." });
 

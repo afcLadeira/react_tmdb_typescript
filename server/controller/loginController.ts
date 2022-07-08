@@ -1,3 +1,5 @@
+import { Request, Response } from "express";
+
 //mongo
 const User = require('../models/users');
 
@@ -8,9 +10,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
 
 
-
-
-const handleLogin = async (req,res) => {
+const handleLogin = async (req : Request,res : Response) => {
 
     const {userName , password} = req.body
 
@@ -53,7 +53,8 @@ const handleLogin = async (req,res) => {
         //------------------------------
 
 
-        res.cookie('jwt' , refreshToken, { httpOnly: true , sameSite: 'None', secure: true , maxAge:24 * 60 * 60 * 1000})
+        // res.cookie('jwt' , refreshToken, { httpOnly: true , sameSite: 'None', secure: true , maxAge:24 * 60 * 60 * 1000})
+        res.cookie('jwt' , refreshToken, { httpOnly: true , sameSite: 'none', secure: true , maxAge:24 * 60 * 60 * 1000})
         res.json({success: `User ${userName} is logged in` , user: {id: foundUser.id , userName:foundUser.userName , accessToken }})
     }
     else {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 
 
-export default function useDebouncer(value : string, otherValueToWatch : any) {
+export default function useDebouncer(value : string, otherValueToWatch : any) : string | null {
  
   const [debounceValue, setDebounceValue] = useState<string | null>(null);
 

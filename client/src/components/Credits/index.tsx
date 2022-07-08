@@ -2,7 +2,12 @@ import { useNavigate } from "react-router-dom";
 import noImage from "../../assets/noImage.png";
 import { PERSON_ROUTE, PROFILE_URL } from "../../constants";
 import { Heading2, PersonPhoto } from "../../styles";
-import { CreditsCastInterface, CreditsCrewInterface, PersonCreditsInterface } from "../../interfaces";
+import {
+  CreditsCastInterface,
+  CreditsCrewInterface,
+  PersonCreditsInterface,
+} from "../../interfaces";
+import { useMemo } from "react";
 
 export interface CreditsProps {
   credits: PersonCreditsInterface;
@@ -15,22 +20,70 @@ export interface CrewGroupsInterface {
 export default function Credits({ credits }: CreditsProps) {
   let navigate = useNavigate();
 
-  let groupDepartments: CrewGroupsInterface = {};
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  let organizeCrewByDepartments = (
+    credits: PersonCreditsInterface
+  ): CrewGroupsInterface => {
+    var startTime = performance.now();
 
-  if (credits) {
-    groupDepartments = [...credits.crew].reduce<CrewGroupsInterface>(
-      (accumulator, currentValue) => {
-        if (accumulator[currentValue.department]) {
-          let tempArray = [...accumulator[currentValue.department]];
-          accumulator[currentValue.department] = [...tempArray, currentValue];
-        } else {
-          accumulator[currentValue.department] = [currentValue];
-        }
-        return accumulator;
-      },
-      {}
-    );
+    if (credits) {
+      return [...credits.crew].reduce<CrewGroupsInterface>(
+        (accumulator, currentValue) => {
+          if (accumulator[currentValue.department]) {
+            let tempArray = [...accumulator[currentValue.department]];
+            accumulator[currentValue.department] = [...tempArray, currentValue];
+          } else {
+            accumulator[currentValue.department] = [currentValue];
+          }
+          var endTime = performance.now();
+
+          console.log(
+            `Call to organizeCrewByDepartments took ${
+              endTime - startTime
+            } milliseconds`
+          );
+          return accumulator;
+        },
+        {}
+      );
+    } else {
+      return {};
+    }
+  };
+
+  //-----------------------------------------------
+                                            //key = string
+  function groupArrayByKey<T extends Record<string, any>>(
+    array: T[],
+    key: string
+  ): { [key: string]: T[] } {
+
+    console.log("function in useMemo");
+
+    if (array.length > 0) {
+      return [...array].reduce<{[key: string]: T[]}>(
+        (accumulator, currentValue) => {
+          if (accumulator[currentValue[key]]) {
+            let tempArray = [...accumulator[currentValue[key]]];
+            accumulator[currentValue[key]] = [...tempArray, currentValue];
+          } else {
+            accumulator[currentValue[key]] = [currentValue];
+          }
+          return accumulator;
+        },
+        {} 
+      );
+    } else {
+      return {};
+    }
   }
+
+  //let groupDepartmentsOld =  organizeCrewByDepartments(credits)
+
+  let groupDepartments: CrewGroupsInterface = useMemo(
+    () => groupArrayByKey(credits ? credits.crew : [], "department"),
+    [credits]
+  );
 
   return (
     <div>
@@ -47,7 +100,7 @@ export default function Credits({ credits }: CreditsProps) {
                 justifyContent: "center",
               }}
             >
-              {credits.cast.map((person : CreditsCastInterface) => (
+              {credits.cast.map((person: CreditsCastInterface) => (
                 <div
                   key={person.credit_id}
                   className="zoom c-pointer"

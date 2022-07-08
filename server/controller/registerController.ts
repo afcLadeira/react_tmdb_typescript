@@ -1,10 +1,13 @@
+import { Request, Response } from "express";
+import { getErrorMessage } from "../helpers/errorHelper";
+
 //mongo
 const User = require("../models/users");
 
 //const bcrypt = require("bcrypt");
 const bcrypt = require('bcryptjs');
 
-const handleNewUser = async (req, res) => {
+const handleNewUser = async (req : Request, res : Response) => {
   const { userName, password } = req.body;
 
   if (!userName || !password) {
@@ -49,7 +52,7 @@ const handleNewUser = async (req, res) => {
 
     res.status(201).json({ success: `New user ${userName} created` });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res.sendStatus(500).json({ message: getErrorMessage(error) });
   }
 };
 

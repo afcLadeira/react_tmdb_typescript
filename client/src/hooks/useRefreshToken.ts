@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { UserContext } from '../context/AuthProvider';
 
 
-const useRefreshToken = () => {
+const useRefreshToken = () : () => Promise<any> => {
     
     const { setAuth } = useAuth();
     

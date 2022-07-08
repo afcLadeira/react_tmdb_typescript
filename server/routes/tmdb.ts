@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const tmdbController = require('../controller/tmdbController');
 
 const app = express();

@@ -4,9 +4,7 @@ import SearchForm from "../../components/SearchForm";
 
 
 export default function Home() {
-const [showPopular , setShowPopular] = useState(false) 
-
-
+const [showPopular , setShowPopular] = useState<boolean>(false) 
 
 return (
     <div>

@@ -18,7 +18,7 @@ export default function CustomModal({
   const [selected, setSelected] = useState<string>("");
 
   const { auth } = useAuth();
-  const [userId] = useState(auth?.id ? auth.id : undefined);
+  const [userId] = useState<number | undefined>(auth?.id ? auth.id : undefined);
 
   const {
     error,
