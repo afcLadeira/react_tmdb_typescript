@@ -51,6 +51,9 @@ export default function NavBar() {
               <Nav.Item>
                 <Toggle theme={theme} toggleTheme={themeToggler}></Toggle>
               </Nav.Item>
+              <Nav.Link href="/wordle">Games</Nav.Link>
+             
+              
             </Nav>
             <Nav>
               {auth?.userName && (

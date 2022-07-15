@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 
 
-export default function useDebouncer(value : string, otherValueToWatch : any) : string | null {
+const useDebouncer = (value : string, otherValueToWatch : any) : string | null => {
  
   const [debounceValue, setDebounceValue] = useState<string | null>(null);
 
@@ -26,3 +26,6 @@ export default function useDebouncer(value : string, otherValueToWatch : any) : 
 
   return debounceValue;
 }
+
+
+export default useDebouncer

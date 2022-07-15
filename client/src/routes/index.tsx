@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "../components/Layout";
+import MovieWordle from "../components/MovieWordle";
 import PersistLogin from "../components/PersistLogin";
 import RequireAuth from "../components/RequireAuth";
 import { FavoritesPage } from "../pages/Favorites";
@@ -24,6 +25,7 @@ export default function Router() {
           <Route path="/favorites" element={<FavoritesPage />}></Route>
           <Route path="/mylists" element={<MyLists />}></Route>
           <Route path="results" element={<Results />}></Route>
+          <Route path="wordle" element={<MovieWordle />}></Route>
           <Route path="movie" element={<Movie />}>
             <Route path=":id" element={<Movie />} />
           </Route>

@@ -9,7 +9,7 @@ export interface AddMovieToListProps {
   movie: MovieInterface;
 }
 
-export default function AddMovieToList({ movie }: AddMovieToListProps) {
+const AddMovieToList = ({ movie }: AddMovieToListProps) => {
   let [modalOpen, setModalOpen, toggle] = useModal();
 
   const { mutate: addMovieToList } = useAddMovieToList();
@@ -42,3 +42,6 @@ export default function AddMovieToList({ movie }: AddMovieToListProps) {
     </>
   );
 }
+
+
+export default AddMovieToList;

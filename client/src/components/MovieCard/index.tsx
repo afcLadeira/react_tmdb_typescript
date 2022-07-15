@@ -48,11 +48,13 @@ export default function MovieCard({ movie } : {movie: MovieInterface}) {
         }
       />
       <Card.Body style={{ backgroundColor: theme.background }}>
+
+        <div style={{position : 'absolute'  , left:10 , top :10 ,border:'2px solid white', borderRadius: '50%' , backgroundColor: 'teal' , minWidth:45, textAlign:'center' , color: 'white' , padding:6 , fontWeight:800}}>{movie.vote_average}</div>
         <Ribbon
           color={
             TYPESCOLORS[movie.media_type!]
               ? TYPESCOLORS[movie.media_type!]
-              : "#8fb9ab"
+              : "#0091a0"
           }
         >
           {movie.media_type ? movie.media_type : "movie"}

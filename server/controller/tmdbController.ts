@@ -18,9 +18,15 @@ const getTVCreditsEndpoint = (id : string) => `${API_URl}3/tv/${id}/credits?api_
 const getMovieDetailsEndpoint = (id : string) =>
   `${API_URl}3/movie/${id}?api_key=${API_KEY}&language=en-US`;
 
+
+const getSimilarMoviesEndpoint = (id : string) =>
+  `${API_URl}3/movie/${id}/similar?api_key=${API_KEY}&language=en-US`;
+
 const getMovieCreditsEndpoint = (id : string) =>
   `${API_URl}3/movie/${id}/credits?api_key=${API_KEY}&language=en-US`;
 
+const getMovieVideosEndpoint= (id : string) =>
+  `${API_URl}3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`;
 
 const getPersonDetailsEndpoint = (id : string) =>
   `${API_URl}3/person/${id}?api_key=${API_KEY}&language=en-US`;
@@ -83,6 +89,28 @@ const getMovieDetails = async (req :Request, res : Response)  => {
     return res.sendStatus(500).json({ message: getErrorMessage(error) });
   }
 };
+const getSimilarMovies = async (req :Request, res : Response)  => {
+  let {id} = req.params;
+  try {
+
+    let result = await axios.get(getSimilarMoviesEndpoint(id));
+
+    res.status(200).json(result.data);
+  } catch (error) {
+    return res.sendStatus(500).json({ message: getErrorMessage(error) });
+  }
+};
+const getMovieVideos = async (req :Request, res : Response)  => {
+  let {id} = req.params;
+  try {
+
+    let result = await axios.get(getMovieVideosEndpoint(id));
+
+    res.status(200).json(result.data);
+  } catch (error) {
+    return res.sendStatus(500).json({ message: getErrorMessage(error) });
+  }
+};
 const getMovieCredits = async (req :Request, res : Response)  => {
   let {id} = req.params;
 
@@ -136,8 +164,6 @@ const search = async (req :Request, res : Response)  => {
   let {type} = req.params;
   let {query} = req.query
 
-  
-
   try {
 
     let result = await axios.get(getSearchEndpoint(type,query));
@@ -149,7 +175,7 @@ const search = async (req :Request, res : Response)  => {
   }
 };
 
-module.exports = { getPopular , 
+module.exports = { getPopular , getMovieVideos,
     getTvDetails , 
     getTvCredits , getMovieDetails , getMovieCredits,
-    getPersonDetails,getPersonMovieCredits, getPersonTVCredits , search};
+    getPersonDetails,getPersonMovieCredits, getPersonTVCredits , search , getSimilarMovies};

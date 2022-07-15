@@ -84,3 +84,39 @@ mongoose.connection.once('open', () => {
   console.log('Connected to MongoDB');
   app.listen(PORT, () => console.log(`Server listening on ${PORT}`));
 });
+
+
+
+class user {
+  constructor(name) {
+
+    this.name = name;
+
+
+    this.greetings = function (date) {
+
+      console.log(date);
+      console.log(this.name);
+    };
+
+  }
+}
+
+function user_(name) {
+  this.name = name;
+
+
+  this.greetings = function (date) {
+
+    console.log(date);
+    console.log(this.name);
+  };
+}
+
+
+let user1 = new user_('andre')
+
+user1.greetings('sdsadsas')
+
+
+console.log(user1.name)

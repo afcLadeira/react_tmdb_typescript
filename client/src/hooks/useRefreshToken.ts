@@ -3,7 +3,7 @@ import useAuth from './useAuth';
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../redux";
 import { useDispatch } from "react-redux";
-import { UserContext } from '../context/AuthProvider';
+import { UserInterface } from '../context/AuthProvider';
 
 
 const useRefreshToken = () : () => Promise<any> => {
@@ -25,7 +25,7 @@ const useRefreshToken = () : () => Promise<any> => {
             withCredentials: true
         });
         
-        setAuth((prev : UserContext) => {
+        setAuth((prev : UserInterface) => {
             // console.log(JSON.stringify(prev));
             // console.log(response.data.accessToken);
             return { ...response.data.user }

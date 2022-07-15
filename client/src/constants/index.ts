@@ -16,7 +16,7 @@ export const API_MOST_POPULAR= `${API_WRAPPER_URL}/mostpopular`;
 
 //TV
 
-export const getTVDetailsEndpoint = (id:string | number | undefined) => `${API_WRAPPER_URL}/tv/${id}`;
+export const getTVDetailsEndpoint = (id:string | number | undefined) : string => `${API_WRAPPER_URL}/tv/${id}`;
 
 
 export const getTVCreditsEndpoint = (id:string | number | undefined) => `${API_WRAPPER_URL}/tv/${id}/credits`;
@@ -69,5 +69,5 @@ export const MYLISTS_ROUTE = "/mylists"
 
 export const PAGES : { [char: string]: string } = { person: "person", movie: "movie", tv: "tvshow" } ;
 
-export const TYPESCOLORS  : { [char: string]: string }  = { person: "#314d63", movie: "#8fb9ab", tv: "#f08976" };
+export const TYPESCOLORS  : { [char: string]: string }  = { person: "#314d63", movie: "#0091a0", tv: "#f08976" };
 

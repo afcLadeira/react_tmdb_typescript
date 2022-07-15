@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
-import AuthContext, { AuthContextShape } from "../context/AuthProvider";
+import AuthContext, { AuthContextInterface } from "../context/AuthProvider";
 
 export default function useAuth() {
-    return useContext<AuthContextShape>(AuthContext)
+    return useContext<AuthContextInterface>(AuthContext)
 }

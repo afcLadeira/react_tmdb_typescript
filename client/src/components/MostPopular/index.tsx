@@ -1,12 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useGetMostPopular } from "../../api/popular";
 import MovieCard from "../MovieCard";
 import { API_MOST_POPULAR } from "../../constants";
 import { Heading2 } from "../../styles";
 import MySpinner from "../Spinner";
 import { MovieInterface, PagesInterface } from "../../interfaces";
+import { Button } from "react-bootstrap";
+import { BsFillCaretDownFill , BsFillCaretUpFill } from "react-icons/bs";
+
+type SortingType = "ASC" | "DESC" | "UNSORTED";
+
+const SortingStateMachine: { [key: string]: string } = {
+  ASC: "DESC",
+  DESC: "UNSORTED",
+  UNSORTED: "ASC",
+};
 
 export default function MostPopular() {
+  const [sortType, setSortType] = useState<SortingType>("UNSORTED");
+
   const {
     data,
     error,
@@ -28,6 +40,7 @@ export default function MostPopular() {
 
       if (!fetching && scrollHeight - scrollTop <= clientHeight * 1.5) {
         fetching = true;
+
         if (hasNextPage) {
           await fetchNextPage();
         }
@@ -43,6 +56,20 @@ export default function MostPopular() {
     };
   }, [fetchNextPage, hasNextPage]);
 
+  const sortByrate = (data: MovieInterface[]) => {
+    let originalData = [...data];
+
+    if (sortType === "UNSORTED") return originalData;
+    else
+      return [
+        ...originalData.sort((a: any, b: any) =>
+          sortType === "ASC"
+            ? b.vote_average - a.vote_average
+            : a.vote_average - b.vote_average
+        ),
+      ];
+  };
+
   if (isError) {
     return <Heading2>ERROR {JSON.stringify(error)}</Heading2>;
   }
@@ -54,6 +81,20 @@ export default function MostPopular() {
   return (
     <div style={{ textAlign: "center" }}>
       <Heading2>Most Popular Movies</Heading2>
+
+      <div className="d-grid gap-2">
+        <Button
+          className="m-5"
+          variant="outline-info"
+          size="sm"
+          onClick={() =>
+            setSortType(SortingStateMachine[sortType] as SortingType)
+          }
+        >
+          Sort by rating {sortType === "ASC" ? <BsFillCaretUpFill/> : sortType === "DESC" ? <BsFillCaretDownFill/> : null}
+        </Button>
+      </div>
+     
       <div
         style={{
           display: "flex",
@@ -64,7 +105,7 @@ export default function MostPopular() {
       >
         {data?.pages.map((page: PagesInterface, i: number) => (
           <React.Fragment key={i}>
-            {page.results.map((movie: MovieInterface) => (
+            {sortByrate(page.results).map((movie: MovieInterface) => (
               <MovieCard key={movie.id} movie={movie}></MovieCard>
             ))}
           </React.Fragment>
