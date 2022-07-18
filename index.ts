@@ -1,4 +1,5 @@
-import express, { Application, NextFunction, Request, Response } from "express";
+var express = require('express')
+import { Application, NextFunction, Request, Response } from "express";
 
 require("dotenv").config();
 //const express = require("express");

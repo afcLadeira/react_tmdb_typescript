@@ -1,18 +1,18 @@
 "use strict";
 exports.__esModule = true;
-var express_1 = require("express");
+var express = require('express');
 require("dotenv").config();
 //const express = require("express");
 var mongoose = require("mongoose");
 var path = require("path");
 var cors = require("cors");
-var logger = require("./server/middleware/logger").logger;
+var logger = require("./server/dist/middleware/logger").logger;
 var cookieParser = require("cookie-parser");
 var PORT = process.env.PORT || 3001;
-var app = (0, express_1["default"])();
-var routes = require("./server/routes");
-var errorHandler = require("./server/middleware/errorHandler").errorHandler;
-var connectDB = require("./server/config/dbConn");
+var app = express();
+var routes = require("./server/dist/routes");
+var errorHandler = require("./server/dist/middleware/errorHandler").errorHandler;
+var connectDB = require("./server/dist/config/dbConn");
 var PUBLIC_FOLDER = process.env.NODE_ENV === "production"
     ? path.join(__dirname, "client", "build")
     : path.join(__dirname, "client", "build");
@@ -49,14 +49,14 @@ var corsOptions = {
 //app.use(cors(corsOptions))
 app.use(cors(corsOptions));
 //middleware to get formData
-app.use(express_1["default"].urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 //middleware for json
-app.use(express_1["default"].json());
+app.use(express.json());
 //middleware for cookies
 app.use(cookieParser());
 //serve static files
-//app.use(express.static(path.join(__dirname, '/server/public')))
-app.use("/", express_1["default"].static(PUBLIC_FOLDER));
+//app.use(express.static(path.join(__dirname, '/server/dist/public')))
+app.use("/", express.static(PUBLIC_FOLDER));
 app.use("/api", routes);
 app.get("/*", function (req, res) {
     res.sendFile(path.join(PUBLIC_FOLDER, "index.html"));
