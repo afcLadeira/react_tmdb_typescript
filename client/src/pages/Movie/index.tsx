@@ -102,8 +102,6 @@ const MovieVideos = ({id} : {id:string}) => {
   
 
   const { data, loading, error } = useFetch<{ results: any}>(`${API_WRAPPER_URL}/movie/${id}/videos`);
-  console.log("🚀 ~ file: index.tsx ~ line 104 ~ MovieVideos ~ error", error)
-  console.log("🚀 ~ file: index.tsx ~ line 104 ~ MovieVideos ~ data", data)
   
   const youtubeVideos = useMemo( () => { 
     if (data?.results) {
@@ -112,7 +110,6 @@ const MovieVideos = ({id} : {id:string}) => {
     }
     else return []
   } , [data]) 
-  console.log("🚀 ~ file: index.tsx ~ line 114 ~ youtubeVideos ~ youtubeVideos", youtubeVideos)
 
   return <div> <Heading2 style={{ textAlign: "center" }}>Videos</Heading2><div style={{display:'flex' , flexWrap:'wrap' , gap:20}}>{youtubeVideos.map((v : any) => (<div>
     <iframe

@@ -40,7 +40,6 @@ const handleNewUser = (req, res) => __awaiter(void 0, void 0, void 0, function* 
             password: hashedPwd,
         };
         const result = yield User.create(newUserMongo);
-        console.log("🚀 ~ file: registerController.js ~ line 81 ~ handleNewUser ~ result", result);
         //------------------------------------
         res.status(201).json({ success: `New user ${userName} created` });
     }

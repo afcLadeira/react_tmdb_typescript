@@ -64,7 +64,6 @@ const handleNewUser = async (req, res) => {
     //MONGO
 
     let usersCount = await User.countDocuments({});
-    console.log("🚀 ~ file: registerController.js ~ line 67 ~ handleNewUser ~ usersCount", usersCount)
 
 
     const newUserMongo = {
@@ -78,7 +77,6 @@ const handleNewUser = async (req, res) => {
       };
 
       const result = await User.create(newUserMongo)
-      console.log("🚀 ~ file: registerController.js ~ line 81 ~ handleNewUser ~ result", result)
 
     //------------------------------------
 

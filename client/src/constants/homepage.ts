@@ -1,1 +1,1 @@
-export const HOMEPAGE_URL = 'https://react-tmdb-nine.vercel.app'
+export const HOMEPAGE_URL = 'https://react-tmdb-typescript.vercel.app'

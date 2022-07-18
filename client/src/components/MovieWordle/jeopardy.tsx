@@ -3,7 +3,6 @@ import { useEffect, useState, useCallback } from "react";
 
 
 export default function Jeopardy({wordOfTheDay , overview} : {wordOfTheDay: string , overview:string}) {
-console.log("🚀 ~ file: JEOPARDY.tsx ~ line 22 ~ Jeopardy ~ wordOfTheDay", wordOfTheDay)
 
 
   const [currentGuess, setCurrentGuess] = useState('');
@@ -71,7 +70,6 @@ function WordRow({
     return row.map((w, index) => {
       let color = (word.includes(w)) ? "lightgreen" : "lightgrey";
 
-     console.log('w' , w)
       if (w !== ' ') {
       return (
         <div

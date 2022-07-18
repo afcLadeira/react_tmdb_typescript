@@ -24,7 +24,6 @@ const handleRefreshToken = async (req, res) => {
 
   //MONGO
   let foundUserMongo = await User.findOne({ refreshToken: refreshToken }).exec();
-  console.log("🚀 ~ file: loginController.js ~ line 32 ~ handleLogin ~ foundUserMongo", foundUserMongo)
 
   //JSON
   const foundUser = usersDB.users.find(

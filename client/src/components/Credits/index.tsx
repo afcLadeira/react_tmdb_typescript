@@ -58,7 +58,7 @@ export default function Credits({ credits }: CreditsProps) {
     key: string
   ): { [key: string]: T[] } {
 
-    console.log("function in useMemo");
+    
 
     if (array.length > 0) {
       return [...array].reduce<{[key: string]: T[]}>(
