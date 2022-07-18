@@ -12,6 +12,8 @@ app.get('/tv/:id', tmdbController.getTvDetails);
 app.get('/tv/:id/credits', tmdbController.getTvCredits);
 app.get('/movie/:id', tmdbController.getMovieDetails);
 app.get('/movie/:id/credits', tmdbController.getMovieCredits);
+app.get('/movie/:id/similar', tmdbController.getSimilarMovies);
+app.get('/movie/:id/videos', tmdbController.getMovieVideos);
 app.get('/person/:id', tmdbController.getPersonDetails);
 app.get('/person/:id/movie_credits', tmdbController.getPersonMovieCredits);
 app.get('/person/:id/tv_credits', tmdbController.getPersonTVCredits);

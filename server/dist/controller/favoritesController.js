@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const errorHelper_1 = require("../helpers/errorHelper");
 const Favorite = require("../models/favorites");
 const getAllFavoritesFromUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -21,7 +22,7 @@ const getAllFavoritesFromUser = (req, res) => __awaiter(void 0, void 0, void 0, 
             : { userId: Number(userId), favoriteMovies: [] });
     }
     catch (error) {
-        res.status(500).json({ message: error.message });
+        return res.sendStatus(500).json({ message: (0, errorHelper_1.getErrorMessage)(error) });
     }
 });
 const addFavorite = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
