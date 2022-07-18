@@ -15,6 +15,8 @@ app.use('/refresh', refresh);
 let logout = require('./logout');
 app.use('/logout', logout);
 
+let tmdb = require('./tmdb');
+app.use('/tmdb', tmdb);
 
 //Protected routes
 app.use(verifyJWT)
@@ -28,7 +30,5 @@ app.use('/favorites', favorites);
 let lists = require('./lists');
 app.use('/lists', lists);
 
-let tmdb = require('./tmdb');
-app.use('/tmdb', tmdb);
 
 module.exports = app;

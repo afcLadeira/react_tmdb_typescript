@@ -2,7 +2,7 @@
   "name": "cra-app",
   "version": "1.0.0",
   "description": "",
-  "main": "server/index.js",
+  "main": "server/index.ts",
   "scripts": {
     "client": "cd client && npm start",
     "server": "nodemon index.ts",
