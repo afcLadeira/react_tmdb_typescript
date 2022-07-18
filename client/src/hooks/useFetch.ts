@@ -1,6 +1,6 @@
 
 import { useCallback, useEffect, useState } from "react";
-import { axiosPrivate } from "../api/axios";
+import useAxiosPrivate from "./useAxiosPrivate";
 
 export interface IFetchInfo<T> {
   loading: boolean;
@@ -30,7 +30,10 @@ const useFetch = <T>(url: string | null) :
 // }  
 FReturn<T> => {
   const [state, setState] = useState<IFetchInfo<T>>(initialValue);
+  
+  const axiosPrivate = useAxiosPrivate();
 
+  
   const getData = useCallback(
     async (url: string) => {
       setState((prevState) => ({ ...prevState, loading: true }));
