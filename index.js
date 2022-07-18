@@ -23,7 +23,7 @@ app.use(logger);
 // //cors middleware with whitelisting
 var allowedOrigins = [
     "https://react-tmdb-di3a9v178-afcladeira.vercel.app",
-    "https://react-tmdb-nine.vercel.app",
+    "https://react-tmdb-typescript.vercel.app",
 ];
 //const allowedOrigins = ['http://localhost:3001' , 'http://localhost:3000']
 // //credentials middleware , before CORS!
